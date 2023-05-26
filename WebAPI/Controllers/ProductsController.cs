@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Models.Requests;
+using Entities.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -16,35 +18,35 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("getall")]
-    public List<Product> GetAll()
+    public List<ProductResponse> GetAll()
     {
         return _productManager.GetAll();
     }
 
     [HttpGet("{id}")]
-    public Product GetById(int id)
+    public ProductResponse GetById(int id)
     {
         return _productManager.GetById(id);
     }
 
     [HttpPost("add")]
-    public IActionResult Add([FromBody] Product request)
+    public IActionResult Add([FromBody] ProductRequest request)
     {
         _productManager.Add(request);
         return Ok();
     }
 
     [HttpPost("update")]
-    public IActionResult Update([FromBody] Product request)
+    public IActionResult Update([FromBody] ProductRequest request)
     {
         _productManager.Update(request);
         return Ok();
     }
 
     [HttpPost("delete")]
-    public IActionResult Delete([FromBody] Product request)
+    public IActionResult Delete([FromBody] int id)
     {
-        _productManager.Delete(request);
+        _productManager.Delete(id);
         return Ok();
     }
 }

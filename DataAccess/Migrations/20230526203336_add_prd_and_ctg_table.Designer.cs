@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(SimpraDbContext))]
-    [Migration("20230525194524_add_prod_and_catg_tabl")]
-    partial class add_prod_and_catg_tabl
+    [Migration("20230526203336_add_prd_and_ctg_table")]
+    partial class add_prd_and_ctg_table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,12 +1,14 @@
 ﻿using Entities.Concrete;
+using Entities.Models.Requests;
+using Entities.Models.Responses;
 
 namespace Business.Abstract;
 
 public interface IProductService
 {
-    List<Product> GetAll();
-    Product GetById(int id);
-    void Add(Product product);
-    void Update(Product product);
-    void Delete(Product product);
+    List<ProductResponse> GetAll();
+    ProductResponse GetById(int id);
+    void Add(ProductRequest productRequest);
+    void Update(ProductRequest productRequest);
+    void Delete(int id);
 }

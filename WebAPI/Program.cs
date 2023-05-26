@@ -1,7 +1,10 @@
+using AutoMapper;
 using Business.Abstract;
 using Business.Concrete;
+using Business.Mapping;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace WebAPI
@@ -18,11 +21,13 @@ namespace WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
 
             builder.Services.AddSingleton<IProductDal, ProductDal>();
             builder.Services.AddSingleton<IProductService, ProductManager>();
             builder.Services.AddSingleton<ICategoryDal, CategoryDal>();
             builder.Services.AddSingleton<ICategoryService, CategoryManager>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

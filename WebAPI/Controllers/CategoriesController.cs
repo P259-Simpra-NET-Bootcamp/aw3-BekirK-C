@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Models.Requests;
+using Entities.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -16,35 +18,35 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpGet("getall")]
-    public List<Category> GetAll()
+    public List<CategoryResponse> GetAll()
     {
         return _categoryManager.GetAll();
     }
 
     [HttpGet("{id}")]
-    public Category GetById(int id)
+    public CategoryResponse GetById(int id)
     {
         return _categoryManager.GetById(id);
     }
 
     [HttpPost("add")]
-    public IActionResult Add([FromBody] Category request)
+    public IActionResult Add([FromBody] CategoryRequest request)
     {
         _categoryManager.Add(request);
         return Ok();
     }
 
     [HttpPost("update")]
-    public IActionResult Update([FromBody] Category request)
+    public IActionResult Update([FromBody] CategoryRequest request)
     {
         _categoryManager.Update(request);
         return Ok();
     }
 
     [HttpPost("delete")]
-    public IActionResult Delete([FromBody] Category request)
+    public IActionResult Delete([FromBody] int id)
     {
-        _categoryManager.Delete(request);
+        _categoryManager.Delete(id);
         return Ok();
     }
 }

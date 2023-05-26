@@ -1,41 +1,53 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Models.Requests;
+using Entities.Models.Responses;
 
 namespace Business.Concrete;
 
 public class ProductManager : IProductService
 {
     private readonly IProductDal _productDal;
+    private readonly IMapper _mapper;
 
-    public ProductManager(IProductDal poductDal)
+    public ProductManager(IProductDal poductDal, IMapper mapper)
     {
         _productDal = poductDal;
+        _mapper = mapper;
     }
 
-    public void Add(Product product)
+    public void Add(ProductRequest productRequest)
     {
-        _productDal.Add(product);
+        var mapped = _mapper.Map<ProductRequest, Product>(productRequest);
+        _productDal.Add(mapped);
     }
 
-    public void Delete(Product product)
+    public void Delete(int id)
     {
-        _productDal.Delete(product);
+        var entity = _productDal.Get(p => p.Id == id);
+        _productDal.Delete(entity);
     }
 
-    public List<Product> GetAll()
+    public List<ProductResponse> GetAll()
     {
-        return _productDal.GetList();
+        var list = _productDal.GetList();
+        var mapped = _mapper.Map<List<Product>, List<ProductResponse>>(list);
+        return mapped;
     }
 
-    public Product GetById(int id)
+    public ProductResponse GetById(int id)
     {
-        return _productDal.Get(p => p.Id == id);
+        var entity = _productDal.Get(p => p.Id == id);
+        var mapped = _mapper.Map<Product, ProductResponse>(entity);
+        return mapped;
     }
 
-    public void Update(Product product)
+    public void Update(ProductRequest productRequest)
     {
-        throw new NotImplementedException();
+        var mapped = _mapper.Map<ProductRequest, Product>(productRequest);
+        _productDal.Update(mapped);
     }
 }
 

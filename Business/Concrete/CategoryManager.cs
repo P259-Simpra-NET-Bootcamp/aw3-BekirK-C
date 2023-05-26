@@ -1,40 +1,53 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
+using Entities.Models.Requests;
+using Entities.Models.Responses;
 
 namespace Business.Concrete;
 
 public class CategoryManager : ICategoryService
 {
     private readonly ICategoryDal _categoryDal;
+    private readonly IMapper _mapper;
 
-    public CategoryManager(ICategoryDal categoryDal)
+    public CategoryManager(ICategoryDal categoryDal, IMapper mapper)
     {
         _categoryDal = categoryDal;
+        _mapper = mapper;
     }
 
-    public void Add(Category category)
+    public void Add(CategoryRequest categoryRequest)
     {
-        _categoryDal.Add(category);
+        var mapped = _mapper.Map<CategoryRequest, Category>(categoryRequest);
+        _categoryDal.Add(mapped);
     }
 
-    public void Delete(Category category)
+    public void Delete(int id)
     {
-        _categoryDal.Delete(category);
+        var entity = _categoryDal.Get(p => p.Id == id);
+        _categoryDal.Delete(entity);
     }
 
-    public List<Category> GetAll()
+    public List<CategoryResponse> GetAll()
     {
-        return _categoryDal.GetList();
+        var list = _categoryDal.GetList();
+        var mapped = _mapper.Map<List<Category>, List<CategoryResponse>>(list);
+        return mapped;
     }
 
-    public Category GetById(int id)
+    public CategoryResponse GetById(int id)
     {
-        return _categoryDal.Get(c => c.Id == id);
+        var entity = _categoryDal.Get(p => p.Id == id);
+        var mapped = _mapper.Map<Category, CategoryResponse>(entity);
+        return mapped;
     }
 
-    public void Update(Category category)
+    public void Update(CategoryRequest categoryRequest)
     {
-        _categoryDal.Update(category);
+        var mapped = _mapper.Map<CategoryRequest, Category>(categoryRequest);
+        _categoryDal.Update(mapped);
     }
 }

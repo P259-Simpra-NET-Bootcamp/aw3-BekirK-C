@@ -9,6 +9,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.Property(x => x.Id).IsRequired(true).UseIdentityColumn();
+        builder.Property(x => x.CategoryId).IsRequired(true);
         builder.Property(x => x.CreatedAt).IsRequired(false);
         builder.Property(x => x.CreatedBy).IsRequired(false).HasMaxLength(30);
         builder.Property(x => x.UpdatedAt).IsRequired(false);
@@ -19,6 +20,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.HasIndex(x => x.Name).IsUnique(true);
 
-        builder.HasOne(x => x.Category).WithMany(x => x.Products);
+        builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
     }
 }
