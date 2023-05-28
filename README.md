@@ -13,3 +13,7 @@
 - 2 model için migration dosyası oluşturulmuştur.
 - Automapper implementasyonu Business katmanında gerçekleştirilmiştir.
 - İlgili controller'lar oluşturulmuştur.
+
+<h4>One-Many İlişki (Postman)</h4>
+
+![2](https://github.com/P259-Simpra-NET-Bootcamp/aw3-BekirK-C/assets/80921292/bc1c41f2-3ce7-4970-83d7-b7f1cfab7235)
