@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
 using Entities.Concrete;
 using Entities.Models.Requests;
 using Entities.Models.Responses;
@@ -21,6 +22,12 @@ public class CategoriesController : ControllerBase
     public List<CategoryResponse> GetAll()
     {
         return _categoryManager.GetAll();
+    }
+
+    [HttpGet("getallwithinclude")]
+    public List<CategoryResponse> GetAllWithInclude()
+    {
+        return _categoryManager.GetAllWithInclude();
     }
 
     [HttpGet("{id}")]

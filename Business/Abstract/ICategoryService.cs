@@ -7,6 +7,7 @@ namespace Business.Abstract;
 public interface ICategoryService
 {
     List<CategoryResponse> GetAll();
+    List<CategoryResponse> GetAllWithInclude();
     CategoryResponse GetById(int id);
     void Add(CategoryRequest category);
     void Update(CategoryRequest category);

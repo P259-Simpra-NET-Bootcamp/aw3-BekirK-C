@@ -7,6 +7,7 @@ namespace Business.Abstract;
 public interface IProductService
 {
     List<ProductResponse> GetAll();
+    List<ProductResponse> GetAllWithInclude();
     ProductResponse GetById(int id);
     void Add(ProductRequest productRequest);
     void Update(ProductRequest productRequest);

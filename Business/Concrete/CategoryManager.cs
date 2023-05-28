@@ -38,6 +38,13 @@ public class CategoryManager : ICategoryService
         return mapped;
     }
 
+    public List<CategoryResponse> GetAllWithInclude()
+    {
+        var list = _categoryDal.GetListWithInclude("Products");
+        var mapped = _mapper.Map<List<Category>, List<CategoryResponse>>(list);
+        return mapped;
+    }
+
     public CategoryResponse GetById(int id)
     {
         var entity = _categoryDal.Get(p => p.Id == id);

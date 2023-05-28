@@ -42,6 +42,16 @@ public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity> 
         }
     }
 
+    public List<TEntity> GetListWithInclude(params string[] includes)
+    {
+        using (var context = new TContext())
+        {
+            var query = context.Set<TEntity>().AsQueryable();
+            query = includes.Aggregate(query, (current, inc) => current.Include(inc));
+            return query.ToList();
+        }
+    }
+
     public void Update(TEntity entity)
     {
         using (var context = new TContext())

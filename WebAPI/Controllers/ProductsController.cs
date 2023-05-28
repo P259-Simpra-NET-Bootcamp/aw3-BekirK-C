@@ -23,6 +23,12 @@ public class ProductsController : ControllerBase
         return _productManager.GetAll();
     }
 
+    [HttpGet("getallwithinclude")]
+    public List<ProductResponse> GetAllWithInclude()
+    {
+        return _productManager.GetAllWithInclude();
+    }
+
     [HttpGet("{id}")]
     public ProductResponse GetById(int id)
     {

@@ -37,6 +37,13 @@ public class ProductManager : IProductService
         return mapped;
     }
 
+    public List<ProductResponse> GetAllWithInclude()
+    {
+        var list = _productDal.GetListWithInclude("Category");
+        var mapped = _mapper.Map<List<Product>, List<ProductResponse>>(list);
+        return mapped;
+    }
+
     public ProductResponse GetById(int id)
     {
         var entity = _productDal.Get(p => p.Id == id);
